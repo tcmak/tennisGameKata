@@ -42,25 +42,23 @@
 }
 
 - (NSString *)getScore {
-    if ((player1score + player2score <= 5 && abs(player1score - player2score) <= 3)
-            && (player1score > player2score ? player1score : player2score)< 4)
+    if ((player1score + player2score <= 5) && [self getLeadingScore] < 4)
         return [self getBasicScore];
 
     return [self getGameScore];
-
 }
 
 - (NSString *)getGameScore {
     NSArray *result = @[@"Advantage", @"wins"];
-    int diff = abs(player1score-player2score) > 2 ? 2 : abs(player1score-player2score) ;
+    int diff = abs(player1score-player2score) > 2 ? 2 : abs(player1score-player2score);
 
-    if (diff ==0)
+    if (diff == 0)
         return @"Deuce";
 
     if (diff == 2)
         gameOn = NO;
 
-    return [NSString stringWithFormat:@"%@ %@", (player1score > player2score ? player1Name : player2Name), result[diff-1]];
+    return [NSString stringWithFormat:@"%@ %@", [self getLeadingPlayer], result[diff - 1]];
 }
 
 - (NSString *)getBasicScore {
@@ -70,6 +68,14 @@
         return [NSString stringWithFormat:@"%@ All", scoreName[player1score]];
 
     return [NSString stringWithFormat:@"%@ %@", scoreName[player1score], scoreName[player2score]];
+}
+
+- (NSString *)getLeadingPlayer {
+    return (player1score > player2score ? player1Name : player2Name);
+}
+
+- (NSUInteger)getLeadingScore {
+    return player1score > player2score ? player1score : player2score;
 }
 
 - (bool)inGameOn {

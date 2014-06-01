@@ -3,7 +3,6 @@ And /^player(\d+) is "([^\"]*)"$/ do |player, name|
   wait_for_keyboard()
   keyboard_enter_text name
   uia_enter
-  sleep(STEP_PAUSE)
 end
 
 When /^player1 scored (\d+) times and player2 scored (\d+) times$/ do |player1ScoredTimes, player2ScoredTimes|
