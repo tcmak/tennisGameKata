@@ -15,8 +15,10 @@
 
 - (IBAction)player2Score;
 
-- (IBAction)player1Is;
+//- (IBAction)player1Is;
 
-- (IBAction)player2Is;
+//- (IBAction)player2Is;
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
 
 @end
