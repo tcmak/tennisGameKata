@@ -22,18 +22,11 @@
         [self dismissTextField];
         [self.tennisGame player1Scored];
         [self.scoreLabel setText:[self.tennisGame getScore]];
-        [self.player1ScoreButton setEnabled:[self.tennisGame inGameOn]];
-        [self.player2ScoreButton setEnabled:[self.tennisGame inGameOn]];
+        [self setScoreButtonEnable];
     }
     @catch (NSException *exception) {
         [self displayException:exception];
     }
-}
-
-- (void)displayException:(NSException *)exception {
-    [self.scoreLabel setText:exception.reason];
-    [self.player1Name setEnabled:[self.player1Name.text isEqualToString:@""]];
-    [self.player2Name setEnabled:[self.player2Name.text isEqualToString:@""]];
 }
 
 - (IBAction)player2Score {
@@ -41,8 +34,7 @@
         [self dismissTextField];
         [self.tennisGame player2Scored];
         [self.scoreLabel setText:[self.tennisGame getScore]];
-        [self.player1ScoreButton setEnabled:[self.tennisGame inGameOn]];
-        [self.player2ScoreButton setEnabled:[self.tennisGame inGameOn]];
+        [self setScoreButtonEnable];
     }
     @catch (NSException *exception) {
         [self displayException:exception];
@@ -52,6 +44,17 @@
 - (void) dismissTextField {
     [self.player1Name resignFirstResponder];
     [self.player2Name resignFirstResponder];
+}
+
+- (void)setScoreButtonEnable {
+    [self.player1ScoreButton setEnabled:[self.tennisGame inGameOn]];
+    [self.player2ScoreButton setEnabled:[self.tennisGame inGameOn]];
+}
+
+- (void)displayException:(NSException *)exception {
+    [self.scoreLabel setText:exception.reason];
+    [self.player1Name setEnabled:[self.player1Name.text isEqualToString:@""]];
+    [self.player2Name setEnabled:[self.player2Name.text isEqualToString:@""]];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
